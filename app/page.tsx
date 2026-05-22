@@ -420,7 +420,7 @@ export default function Home() {
       {/* FOOTER */}
       <footer className="border-t border-purple-900/40 mt-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 text-center text-gray-500 text-xs sm:text-sm md:text-base">
-          © 2026 EMR Soluções Digitais — Todos os direitos reservados.
+          EMR Soluções Digitais 
         </div>
       </footer>
     </main>
