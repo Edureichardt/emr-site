@@ -14,7 +14,30 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "EMR",
-  description: "Soluçoes digitais",
+  description: "Soluções digitais modernas para empresas e negócios",
+
+  keywords: [
+    "soluções digitais",
+    "desenvolvimento web",
+    "sites modernos",
+    "automação",
+  ],
+
+  openGraph: {
+    title: "EMR",
+    description: "Soluções digitais modernas",
+    url: "https://www.emrdigital.com.br/",
+    siteName: "EMR",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "pt_BR",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -24,10 +47,12 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="pt-BR"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+      </body>
     </html>
   );
 }
