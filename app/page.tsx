@@ -631,7 +631,7 @@ export default function Home() {
 
       {/* FOOTER */}
       <footer className="border-t border-white/10 py-8 text-center text-gray-500">
-        EMR Soluções Digitais © 2026
+        Desenvolvido por EMR Soluções Digitais 
       </footer>
 
     </main>
