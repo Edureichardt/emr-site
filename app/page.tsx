@@ -380,11 +380,11 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[10000] bg-black/95 flex flex-col lg:flex-row items-center justify-center gap-6 p-0 sm:p-4 cursor-default"
+            className="fixed inset-0 z-[10000] bg-black/95 flex flex-col lg:flex-row items-center justify-start lg:justify-center gap-6 p-4 overflow-y-auto cursor-default"
           >
             {/* CONTAINER PRINCIPAL DO JOGO */}
             <div 
-              className={`relative w-full sm:max-w-[500px] h-full sm:h-[500px] bg-gradient-to-b ${gameBgColor} border-0 sm:border border-purple-500/30 sm:rounded-3xl overflow-hidden shadow-2xl select-none transition-all duration-1000`} 
+              className={`relative w-full max-w-[500px] h-[450px] sm:h-[500px] flex-shrink-0 bg-gradient-to-b ${gameBgColor} border border-purple-500/30 rounded-3xl overflow-hidden shadow-2xl select-none transition-all duration-1000 mt-12 lg:mt-0`} 
               onClick={handleJump}
               onTouchStart={(e) => {
                 e.preventDefault();
@@ -452,7 +452,7 @@ export default function Home() {
 
               {/* O JOGADOR: Foguete EMR */}
               <div 
-                className="absolute left-[60px] sm:left-[100px] transition-transform duration-75"
+                className="absolute left-[40px] sm:left-[100px] transition-transform duration-75"
                 style={{ 
                   top: `${rocketY}px`,
                   transform: `translateY(-50%) rotate(${velocity * 4 - 20}deg)` 
@@ -536,8 +536,8 @@ export default function Home() {
               )}
             </div>
 
-            {/* PAINEL LATERAL DE PRÊMIOS */}
-            <div className="w-full lg:w-[260px] bg-neutral-950/80 border border-purple-500/20 rounded-3xl p-5 backdrop-blur-md max-h-[500px] overflow-y-auto hidden sm:block">
+            {/* PAINEL LATERAL/INFERIOR DE PRÊMIOS (Responsivo para Celular também) */}
+            <div className="w-full max-w-[500px] lg:w-[260px] bg-neutral-950/80 border border-purple-500/20 rounded-3xl p-5 backdrop-blur-md lg:max-h-[500px] overflow-y-auto mb-12 lg:mb-0">
               <div className="flex items-center gap-2 mb-4 border-b border-white/10 pb-2">
                 <Trophy className="w-5 h-5 text-yellow-400" />
                 <h4 className="font-black text-sm tracking-wide">RECOMPENSAS DE SCORE</h4>
@@ -832,138 +832,15 @@ export default function Home() {
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <motion.div
-                key={index}
-                whileHover={{ y: -10 }}
-                onClick={() => setOpenCard(openCard === index ? null : index)}
-                className="group cursor-pointer relative overflow-hidden rounded-[30px] border border-white/10 bg-white/5 backdrop-blur-2xl p-8 hover:border-purple-500/50 transition-all duration-500 hover:shadow-[0_0_50px_rgba(168,85,247,0.25)]"
-              >
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-br from-purple-500/10 to-transparent" />
-                
-                <div className="relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-fuchsia-600 flex items-center justify-center mb-6">
-                    <Icon className="w-8 h-8" />
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-2xl font-bold">{service.title}</h3>
-                    <ChevronDown className={`transition ${openCard === index ? "rotate-180" : ""}`} />
-                  </div>
-
-                  <div
-                    className={`overflow-hidden transition-all duration-500 ${
-                      openCard === index ? "max-h-96 opacity-100 mt-6" : "max-h-0 opacity-0"
-                    }`}
-                  >
-                    <div className="h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent my-6" />
-                    <p className="text-gray-400 leading-7">{service.description}</p>
-                  </div>
-                </div>
-              </motion.div>
+              <div key={index} className="p-8 border border-white/10 bg-white/5 rounded-3xl backdrop-blur-xl">
+                <Icon className="w-12 h-12 text-purple-400 mb-6" />
+                <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
+                <p className="text-gray-400 leading-relaxed">{service.description}</p>
+              </div>
             );
           })}
         </div>
       </section>
-
-      {/* INSTAGRAM */}
-      <section id="instagram" className="max-w-7xl mx-auto px-6 py-24">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-pink-500/30 bg-white/5 mb-8">
-            <Camera className="w-5 h-5 text-pink-400" />
-            Instagram EMR
-          </div>
-          <h2 className="text-5xl font-black">Acompanhe nosso Instagram</h2>
-          <p className="text-gray-400 mt-6 text-lg">Conteúdos, estratégias e bastidores da EMR.</p>
-        </div>
-
-        <div className="rounded-[40px] border border-white/10 bg-white/5 backdrop-blur-xl p-10 text-center">
-          <div className="flex justify-center mb-6">
-            <Camera className="w-16 h-16 text-pink-500" />
-          </div>
-          <h3 className="text-3xl font-bold mb-4">Veja nossas publicações</h3>
-          <p className="text-gray-400 max-w-2xl mx-auto leading-8">
-            Acesse o Instagram oficial da EMR para acompanhar conteúdos, projetos, marketing digital e novidades.
-          </p>
-          <a
-            href="https://www.instagram.com/emr_solucoesdigitais/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 mt-10 bg-gradient-to-r from-pink-600 to-purple-600 hover:scale-105 transition px-8 py-4 rounded-2xl font-bold shadow-2xl"
-          >
-            <Camera className="w-5 h-5" />
-            Ver Instagram
-          </a>
-        </div>
-      </section>
-
-      {/* PROCESSO */}
-      <section id="processo" className="max-w-6xl mx-auto px-6 py-24">
-        <h2 className="text-5xl font-black text-center mb-20">Como funciona</h2>
-        <div className="grid md:grid-cols-4 gap-8">
-          {[
-            "Reunião estratégica",
-            "Planejamento",
-            "Desenvolvimento",
-            "Entrega e suporte",
-          ].map((item, index) => (
-            <motion.div
-              key={index}
-              whileHover={{ scale: 1.05 }}
-              className="relative border border-white/10 bg-white/5 backdrop-blur-xl rounded-[30px] p-8 text-center"
-            >
-              <div className="text-5xl font-black text-purple-500 mb-6">0{index + 1}</div>
-              <h3 className="text-xl font-bold">{item}</h3>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* CONTATO */}
-      <section id="contato" className="max-w-6xl mx-auto px-6 py-24">
-        <div className="rounded-[40px] p-12 bg-gradient-to-r from-purple-950 via-purple-800 to-fuchsia-700 relative overflow-hidden">
-          <div className="absolute inset-0 bg-black/20" />
-          <div className="relative z-10 text-center">
-            <h2 className="text-5xl font-black mb-6">Vamos criar algo incrível?</h2>
-            <p className="text-lg text-purple-100 max-w-2xl mx-auto">
-              Entre em contato e transforme sua presença digital.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center mt-12">
-              <a
-                href="https://wa.me/5547991666865"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-black/40 hover:bg-black/60 transition px-8 py-5 rounded-2xl flex items-center justify-center gap-3"
-              >
-                <MessageCircle />
-                WhatsApp
-              </a>
-              <a
-                href="mailto:contatoemrdigital@gmail.com"
-                className="bg-black/40 hover:bg-black/60 transition px-8 py-5 rounded-2xl flex items-center justify-center gap-3"
-              >
-                <Mail />
-                Gmail
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* BOTÃO FLUTUANTE WHATSAPP */}
-      <a
-        href="https://wa.me/5547991666865"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-gradient-to-r from-purple-600 to-fuchsia-600 flex items-center justify-center shadow-[0_0_40px_rgba(168,85,247,0.7)] animate-pulse"
-      >
-        <MessageCircle className="w-8 h-8" />
-      </a>
-
-      {/* FOOTER */}
-      <footer className="border-t border-white/10 py-8 text-center text-gray-500">
-        Desenvolvido por EMR Soluções Digitais
-      </footer>
-
     </main>
   );
 }
