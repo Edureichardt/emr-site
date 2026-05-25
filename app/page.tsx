@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 import {
   MessageCircle,
@@ -137,7 +137,7 @@ export default function Home() {
             {/* MOBILE */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="lg:hidden z-50"
+              className="lg:hidden z-50 relative"
             >
               {menuOpen ? (
                 <X className="w-7 h-7" />
@@ -146,7 +146,7 @@ export default function Home() {
               )}
             </button>
 
-            {/* NAV */}
+            {/* NAV DESKTOP */}
             <nav className="hidden lg:flex items-center gap-10">
               <a href="#sobre" className="hover:text-purple-400 transition">
                 Sobre
@@ -208,6 +208,65 @@ export default function Home() {
           </div>
 
         </div>
+
+        {/* MENU MOBILE */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.3 }}
+              className="lg:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-2xl border-t border-white/10 z-40"
+            >
+              <nav className="flex flex-col items-center gap-6 py-10 text-lg font-semibold">
+
+                <a
+                  href="#sobre"
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:text-purple-400 transition"
+                >
+                  Sobre
+                </a>
+
+                <a
+                  href="#catalogo"
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:text-purple-400 transition"
+                >
+                  Serviços
+                </a>
+
+                <a
+                  href="#processo"
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:text-purple-400 transition"
+                >
+                  Processo
+                </a>
+
+                <a
+                  href="#instagram"
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:text-purple-400 transition"
+                >
+                  Instagram
+                </a>
+
+                <a
+                  href="https://wa.me/5547991666865"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 bg-gradient-to-r from-purple-700 to-fuchsia-600 px-8 py-4 rounded-2xl font-bold shadow-2xl shadow-purple-900/40"
+                >
+                  Solicitar orçamento
+                </a>
+
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
       </header>
 
       {/* HERO */}
