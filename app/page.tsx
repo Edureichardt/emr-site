@@ -431,7 +431,7 @@ export default function Home() {
             </h2>
 
             <p className="text-gray-400 leading-8 mt-8 text-lg">
-              Desenvolvemos soluções digitais premium para empresas
+              Desenvolvemos soluções digitais premium para empresas e pessoas
               que querem autoridade, presença online e crescimento real.
             </p>
 
