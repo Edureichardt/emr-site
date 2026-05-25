@@ -18,6 +18,7 @@ import {
   Headphones,
   Camera,
   ArrowRight,
+  Rocket,
 } from "lucide-react";
 
 export default function Home() {
@@ -43,6 +44,15 @@ export default function Home() {
     return () => {
       window.removeEventListener("mousemove", moveCursor);
     };
+  }, []);
+
+  // REMOVE DEDINHO DOS LINKS/BOTÕES
+  useEffect(() => {
+    const elements = document.querySelectorAll("a, button");
+
+    elements.forEach((el) => {
+      (el as HTMLElement).style.cursor = "none";
+    });
   }, []);
 
   // FECHAR MENU
@@ -114,7 +124,61 @@ export default function Home() {
   ];
 
   return (
-    <main className="relative min-h-screen bg-black text-white overflow-x-hidden">
+    <main className="relative min-h-screen bg-black text-white overflow-x-hidden cursor-none">
+
+      {/* CURSOR FOGUETE */}
+      <motion.div
+        className="pointer-events-none fixed z-[9999] hidden md:flex"
+        animate={{
+          x: "var(--x)",
+          y: "var(--y)",
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 500,
+          damping: 28,
+        }}
+        style={{
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+      >
+        <div className="relative flex items-center justify-center">
+
+          {/* GLOW */}
+          <div className="absolute w-20 h-20 rounded-full bg-purple-500/20 blur-3xl animate-pulse" />
+
+          {/* FOGO */}
+          <motion.div
+            animate={{
+              scaleY: [1, 1.5, 1],
+              opacity: [0.7, 1, 0.7],
+            }}
+            transition={{
+              duration: 0.3,
+              repeat: Infinity,
+            }}
+            className="absolute top-7 w-3 h-8 bg-gradient-to-b from-fuchsia-400 via-purple-500 to-transparent blur-[2px] rounded-full"
+          />
+
+          {/* FOGUETE */}
+          <motion.div
+            whileHover={{
+              rotate: -45,
+              scale: 1.2,
+            }}
+            className="relative"
+          >
+            <Rocket
+              className="w-9 h-9 text-purple-400 drop-shadow-[0_0_12px_rgba(168,85,247,1)]"
+              style={{
+                transform: "rotate(-45deg)",
+              }}
+            />
+          </motion.div>
+
+        </div>
+      </motion.div>
 
       {/* CURSOR GLOW */}
       <div
@@ -631,7 +695,7 @@ export default function Home() {
 
       {/* FOOTER */}
       <footer className="border-t border-white/10 py-8 text-center text-gray-500">
-        Desenvolvido por EMR Soluções Digitais 
+        Desenvolvido por EMR Soluções Digitais
       </footer>
 
     </main>
